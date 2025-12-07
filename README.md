@@ -1,4 +1,4 @@
-# Freaky Ahh CVision — Gesture-to-GIF but with Brainrot Energy
+# Freaky Ahh CVision: Gesture-to-GIF but with Brainrot Energy
 
 Realtime cam: you mug, you move, you get a meme GIF slapped next to your face. Built with **Python + OpenCV + MediaPipe Holistic + NumPy + ImageIO**. Powered by pure zoomer neurons.
 
@@ -9,7 +9,7 @@ Realtime cam: you mug, you move, you get a meme GIF slapped next to your face. B
 - Full GIF playback; no frame-skipping crime.
 
 ## Setup (trust the process)
-1) Use Python **3.11** (mediapipe likes that). You already have it: `py -3.11 --version`.
+1) Use Python **3.11** (mediapipe likes that). 
 2) Install deps:
 	```bash
 	py -3.11 -m pip install --upgrade pip
@@ -53,4 +53,4 @@ FreakyAhhCVision/
 - **Cam dead?** Swap `VideoCapture(0)` to `VideoCapture(1)`.
 - **Laggy GIFs?** Drop `gif_fps` or shrink cam/GIF sizes.
 
-Made by **Abs** ft. Copilot (GPT-5.1-Codex-Max) running on caffeine and vibes.
+Made by **Abs** 
