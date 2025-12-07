@@ -1,146 +1,56 @@
-# Freak Detector — Real-Time Gesture → GIF System
+# Freaky Ahh CVision — Gesture-to-GIF but with Brainrot Energy
 
-Freak Detector is a real-time computer-vision project that detects face and hand gestures using **MediaPipe Holistic** and plays corresponding **GIF animations** on-screen.
-This project is built in Python using **OpenCV**, **MediaPipe**, **NumPy**, and **ImageIO**.
+Realtime cam: you mug, you move, you get a meme GIF slapped next to your face. Built with **Python + OpenCV + MediaPipe Holistic + NumPy + ImageIO**. Powered by pure zoomer neurons.
 
-#🧠 Features
+## What it does (sparknotes)
+- Quick nod = blink gif, clap clap.
+- Hands up, tuff pose, rubbing hands, finger-on-mouth thinking — it all maps to matching reaction GIFs.
+- Stable transitions so it doesn’t flip out like a laggy TikTok filter.
+- Full GIF playback; no frame-skipping crime.
 
-* **Quick Nod → Blink** gesture detection
-* **Hand Mesh recognition** (improves accuracy of hands_up, tuff, rubbing, idea)
-* **Tongue / Mouth-open detection**
-* **Finger-in-mouth → Thinking**
-* **Joined hands → Rubbing hands**
-* **Weighing hands → Tuff gesture**
-* **Stable GIF transitions**
-* **Full GIF playback per gesture (no skipping)**
-* **Smooth output panel combining camera + GIF**
+## Setup (trust the process)
+1) Use Python **3.11** (mediapipe likes that). You already have it: `py -3.11 --version`.
+2) Install deps:
+	```bash
+	py -3.11 -m pip install --upgrade pip
+	py -3.11 -m pip install mediapipe opencv-python imageio numpy
+	```
+3) Run it:
+	```bash
+	py -3.11 freak_detector.py
+	```
+	Smash **Q** to yeet the window.
 
-## 📂 Project Structure
-
+## Folder lore
 ```
-FreakDetector/
-│
-├── freak_detector.py
-├── assets/
-│      ├── tuff.gif
-│      ├── thinking.gif
-│      ├── idea.gif
-│      ├── blink.gif
-│      ├── tongue.gif
-│      ├── hands_up.gif
-│      ├── rubbing_hands.gif
-│
-└── README.md
+FreakyAhhCVision/
+├─ freak_detector.py   # main brainrot engine
+├─ assets/             # the reaction GIF stash
+└─ README.md           # you are here
 ```
 
-## 📦 Requirements
+## Gestures → GIFs (vibe chart)
+| Gesture    | How to trigger                          | GIF |
+| ---------- | --------------------------------------- | --- |
+| tuff       | Hands different height + spaced wrists  | tuff.gif |
+| thinking   | Index finger near mouth                 | thinking.gif |
+| idea       | Index pointing up                       | idea.gif |
+| blink/nod  | Fast downward head bop                  | blink.gif |
+| tongue     | Mouth gap past threshold                | tongue.gif |
+| hands_up   | Both hands above nose                   | hands_up.gif |
+| rubbing    | Index tips close together               | rubbing_hands.gif |
+| neutral    | Nothing spotted                         | black screen |
 
-Make sure you have **Python 3.8+** installed.
+## Under the hood (quick nerd dump)
+- MediaPipe Holistic gives face + both-hand landmarks.
+- Nose history catches speedy nods → blink trigger.
+- Mouth gap and finger-to-mouth distance for tongue/thinker.
+- Gesture history smoothing so it doesn’t spaz-switch every frame.
+- GIFs preload once; blended with `cv2.addWeighted` for smooth vibes.
 
-Install required libraries:
+## If it acts goofy
+- **GIFs missing?** Check filenames in `assets/` match the table.
+- **Cam dead?** Swap `VideoCapture(0)` to `VideoCapture(1)`.
+- **Laggy GIFs?** Drop `gif_fps` or shrink cam/GIF sizes.
 
-```bash
-pip install opencv-python mediapipe imageio numpy
-```
-
----
-
-## ▶️ How to Run
-
-Open terminal in the project folder:
-
-```bash
-python freak_detector.py
-```
-
-Press **Q** to quit.
-
----
-
-## ✋ Gestures & Their GIFs
-
-| Gesture Name    | Trigger Logic                                       | Plays GIF           |
-| --------------- | --------------------------------------------------- | ------------------- |
-| **tuff**        | Hands at different height + distance between wrists | `tuff.gif`          |
-| **thinking**    | Finger (index tip) near mouth                       | `thinking.gif`      |
-| **idea**        | Index finger pointing upwards                       | `idea.gif`          |
-| **blink / nod** | Very fast downward head movement                    | `blink.gif`         |
-| **tongue**      | Mouth open beyond threshold                         | `tongue.gif`        |
-| **hands_up**    | Both hands raised above nose                        | `hands_up.gif`      |
-| **rubbing**     | Both index fingers close to each other              | `rubbing_hands.gif` |
-| **neutral**     | Nothing detected                                    | Black screen        |
-
----
-
-## 🧠 How Detection Works
-
-The script uses **MediaPipe Holistic** to capture:
-
-* 478 **face landmarks**
-* 21 **hand landmarks** (per hand)
-* Nose movement history for **quick nod detection**
-* Eye aspect ratio + mouth gap detection
-
-Gesture stabilization ensures the system does not switch GIFs rapidly.
-
----
-
-## 🖼 GIF Engine Logic
-
-* GIFs are pre-loaded once at start.
-* Each gesture plays **from frame 0 to end**, looped.
-* If gesture changes → GIF resets.
-* Uses `cv2.addWeighted()` for smooth blending transitions.
-
----
-
-## ⚠️ Troubleshooting
-
-### ❗ GIF not loading
-
-Check that all GIFs are inside `/assets` folder, correct names:
-
-```
-tuff.gif
-thinking.gif
-idea.gif
-blink.gif
-tongue.gif
-hands_up.gif
-rubbing_hands.gif
-```
-
-### ❗ Camera not opening
-
-Try changing:
-
-```python
-cap = cv2.VideoCapture(0)
-```
-
-to:
-
-```python
-cap = cv2.VideoCapture(1)
-```
-
-### ❗ Slow GIF playback
-
-Use smaller dimensions or reduce FPS from:
-
-```python
-gif_fps = 12
-```
-
----
-
-## 📘 Notes
-
-* This project requires good lighting for best detection.
-* Works best when camera is at face level.
-* Some gestures may conflict — stabilization reduces false positives.
-
----
-
-
-Developed by **Chan** with help from ChatGPT.
+Made by **Abs** ft. Copilot (GPT-5.1-Codex-Max) running on caffeine and vibes.
